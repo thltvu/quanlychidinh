@@ -1093,7 +1093,7 @@
                 let isFallback = false;
 
                 try {
-                    rawData = await fetchAllPages("Thongtin", queryStr, "Ngay", "Ten_BN");
+                    rawData = await fetchAllPages("Thongtin", queryStr, "Ngay", "matt");
                 } catch (err) {
                     // Xử lý lệch pha hoa/thường
                     if (err.code === "PGRST200" || err.message.includes("does not exist")) {
@@ -1106,7 +1106,7 @@
                             nguoigv:Nhanvien!Nguoi_GV (manv, tennv)
                         `;
                         try {
-                            rawData = await fetchAllPages("thongtin", lowerQueryStr, "ngay", "ten_bn");
+                            rawData = await fetchAllPages("thongtin", lowerQueryStr, "ngay", "matt");
                         } catch (e2) {
                             isFallback = true;
                         }
@@ -1166,7 +1166,7 @@
                     // Sắp xếp theo ngày và tên bệnh nhân bằng JS
                     mainRecords.sort((a, b) => {
                         if (a.Ngay !== b.Ngay) return a.Ngay.localeCompare(b.Ngay);
-                        return a.Ten_BN.localeCompare(b.Ten_BN);
+                        return a.matt - b.matt;
                     });
                 } else {
                     // Chuẩn hóa dữ liệu trả về từ query join thành công

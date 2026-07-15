@@ -1187,6 +1187,42 @@
                     });
                 }
 
+                // --- THUẬT TOÁN SẮP XẾP GỘP NHÓM & GIỮ THỨ TỰ NHẬP ---
+                // 1. Tìm ID (matt) nhỏ nhất của mỗi bệnh nhân trong ngày (ca đầu tiên của người đó)
+                const minMattMap = {};
+               mainRecords.forEach((r, idx) => {
+                    r._originalIndex = idx; // Lưu lại đúng thứ tự từ Database đưa xuống
+                    r.Ten_BN = (r.Ten_BN || "").trim(); // Cắt bỏ khoảng trắng thừa ở hai đầu
+                });
+
+                // 1. Tìm vị trí xuất hiện sớm nhất của mỗi cụm bệnh nhân
+                const minIndexMap = {};
+                mainRecords.forEach(r => {
+                    const key = r.Ngay + "_" + r.Ten_BN.toLowerCase(); // Phân biệt theo ngày và tên
+
+                    if (minIndexMap[key] === undefined || r._originalIndex < minIndexMap[key]) {
+                        minIndexMap[key] = r._originalIndex;
+                    }
+                });
+
+                // 2. Tiến hành sắp xếp lại
+                mainRecords.sort((a, b) => {
+                    // Ưu tiên 1: Ngày trước
+                    if (a.Ngay !== b.Ngay) return (a.Ngay || "").localeCompare(b.Ngay || "");
+
+                    const keyA = a.Ngay + "_" + a.Ten_BN.toLowerCase();
+                    const keyB = b.Ngay + "_" + b.Ten_BN.toLowerCase();
+
+                    // Ưu tiên 2: Cụm bệnh nhân nào xuất hiện trước thì gom toàn bộ lên trước
+                    if (minIndexMap[keyA] !== minIndexMap[keyB]) {
+                        return minIndexMap[keyA] - minIndexMap[keyB];
+                    }
+
+                    // Ưu tiên 3: Các ca của cùng 1 bệnh nhân thì giữ đúng thứ tự ca nào nhập trước nằm trên
+                    return a._originalIndex - b._originalIndex;
+                });
+                // ----------------------------------------------------
+
                 renderMainTable();
             } catch (err) {
                 console.error(err);

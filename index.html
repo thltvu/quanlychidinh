@@ -1081,7 +1081,7 @@
             try {
                 // Câu lệnh JOIN
                 let queryStr = `
-                    matt, Ngay, Ten_BN, TG_bat_dau, TG_KT, EKIP,
+                    matt, created_at, ID_BN, Ngay, Ten_BN, TG_bat_dau, TG_KT, EKIP,
                     Chidinh (macd, Ten_chidinh),
                     May (Mamay, tenmay),
                     NguoiTH:Nhanvien!Nguoi_TH (manv, tennv),
@@ -1098,7 +1098,7 @@
                     // Xử lý lệch pha hoa/thường
                     if (err.code === "PGRST200" || err.message.includes("does not exist")) {
                         let lowerQueryStr = `
-                            matt, ngay, ten_bn, tg_bat_dau, tg_kt, ekip,
+                            matt, created_at, id_bn, ngay, ten_bn, tg_bat_dau, tg_kt, ekip,
                             chidinh:Chidinh (macd, ten_chidinh),
                             may:May (mamay, tenmay),
                             nguoith:Nhanvien!Nguoi_TH (manv, tennv),
@@ -1173,6 +1173,8 @@
                     mainRecords = (rawData || []).map(r => {
                         return {
                             matt: r.matt,
+                            created_at: r.created_at, // Thêm thời gian tạo
+                            ID_BN: r.ID_BN || r.id_bn, // Thêm ID bệnh nhân
                             Ngay: r.Ngay || r.ngay,
                             Ten_BN: r.Ten_BN || r.ten_bn,
                             TG_bat_dau: r.TG_bat_dau || r.tg_bat_dau,
@@ -1187,41 +1189,43 @@
                     });
                 }
 
-                // --- THUẬT TOÁN SẮP XẾP GỘP NHÓM & GIỮ THỨ TỰ NHẬP ---
-                // 1. Tìm ID (matt) nhỏ nhất của mỗi bệnh nhân trong ngày (ca đầu tiên của người đó)
-                const minMattMap = {};
-               mainRecords.forEach((r, idx) => {
-                    r._originalIndex = idx; // Lưu lại đúng thứ tự từ Database đưa xuống
-                    r.Ten_BN = (r.Ten_BN || "").trim(); // Cắt bỏ khoảng trắng thừa ở hai đầu
+                // --- THUẬT TOÁN SẮP XẾP GỘP NHÓM THEO ID_BN VÀ CREATED_AT ---
+                mainRecords.forEach(r => {
+                    r.Ten_BN = (r.Ten_BN || "").trim();
+                    r.ID_BN = (r.ID_BN !== undefined && r.ID_BN !== null) ? r.ID_BN : r.Ten_BN;
                 });
 
-                // 1. Tìm vị trí xuất hiện sớm nhất của mỗi cụm bệnh nhân
-                const minIndexMap = {};
+                // 1. Tìm thời gian tạo (created_at) cũ nhất của từng ID_BN
+                const minTimeMap = {};
                 mainRecords.forEach(r => {
-                    const key = r.Ngay + "_" + r.Ten_BN.toLowerCase(); // Phân biệt theo ngày và tên
+                    const key = r.Ngay + "_" + r.ID_BN;
+                    const timeStr = r.created_at || "";
 
-                    if (minIndexMap[key] === undefined || r._originalIndex < minIndexMap[key]) {
-                        minIndexMap[key] = r._originalIndex;
+                    if (timeStr && (!minTimeMap[key] || timeStr < minTimeMap[key])) {
+                        minTimeMap[key] = timeStr; // Lấy thời gian chuẩn theo cột created_at như ảnh
                     }
                 });
 
-                // 2. Tiến hành sắp xếp lại
+                // 2. Tiến hành sắp xếp
                 mainRecords.sort((a, b) => {
-                    // Ưu tiên 1: Ngày trước
+                    // Ưu tiên 1: Sắp xếp theo Ngày
                     if (a.Ngay !== b.Ngay) return (a.Ngay || "").localeCompare(b.Ngay || "");
 
-                    const keyA = a.Ngay + "_" + a.Ten_BN.toLowerCase();
-                    const keyB = b.Ngay + "_" + b.Ten_BN.toLowerCase();
+                    const keyA = a.Ngay + "_" + a.ID_BN;
+                    const keyB = b.Ngay + "_" + b.ID_BN;
 
-                    // Ưu tiên 2: Cụm bệnh nhân nào xuất hiện trước thì gom toàn bộ lên trước
-                    if (minIndexMap[keyA] !== minIndexMap[keyB]) {
-                        return minIndexMap[keyA] - minIndexMap[keyB];
+                    const minA = minTimeMap[keyA] || "9999"; // Fallback nếu ca bị thiếu created_at
+                    const minB = minTimeMap[keyB] || "9999";
+
+                    // Ưu tiên 2: Nhóm nào có ca tạo sớm nhất sẽ kéo toàn bộ nhóm hiển thị lên trước
+                    if (minA !== minB) {
+                        return minA.localeCompare(minB);
                     }
 
-                    // Ưu tiên 3: Các ca của cùng 1 bệnh nhân thì giữ đúng thứ tự ca nào nhập trước nằm trên
-                    return a._originalIndex - b._originalIndex;
+                    // Ưu tiên 3: Nếu trong cùng 1 nhóm (1 bệnh nhân), ca nào tạo trước thì xếp trên
+                    return (a.created_at || "").localeCompare(b.created_at || "");
                 });
-                // ----------------------------------------------------
+                // ----------------------------------------------------------- -----------------------------------------------------------
 
                 renderMainTable();
             } catch (err) {
@@ -1258,13 +1262,14 @@
             }
 
             // Tính toán rowspan cho cột Tên Bệnh Nhân (Cột 1) dựa trên đồng trùng cả Ngày và Tên BN
+            // Tính toán rowspan cho cột Tên Bệnh Nhân (Cột 1) dựa trên đồng trùng cả Ngày và ID_BN
             const nameSpanMap = [];
             i = 0;
             while (i < mainRecords.length) {
                 let j = i + 1;
-                while (j < mainRecords.length && 
-                       mainRecords[j].Ngay === mainRecords[i].Ngay && 
-                       mainRecords[j].Ten_BN === mainRecords[i].Ten_BN) {
+                while (j < mainRecords.length &&
+                    mainRecords[j].Ngay === mainRecords[i].Ngay &&
+                    mainRecords[j].ID_BN === mainRecords[i].ID_BN) {
                     j++;
                 }
                 const span = j - i;
@@ -1422,6 +1427,9 @@
                 return;
             }
 
+           // Tìm xem bệnh nhân này đã có ca nào trong lưới (cùng ngày) chưa
+            let existingPatient = mainRecords.find(r => r.Ten_BN.toLowerCase() === name.toLowerCase());
+
             const payload = {
                 "Ngay": dateIso,
                 "Ten_BN": name,
@@ -1434,6 +1442,11 @@
                 "Nguoi_TT": nguoi_tt_id,
                 "Nguoi_GV": nguoi_gv_id
             };
+
+            // Nếu đã tồn tại, dùng lại ID_BN cũ để gộp nhóm. Nếu chưa, hệ thống không gửi ID để Supabase tự sinh số mới.
+            if (existingPatient && existingPatient.ID_BN) {
+                payload["ID_BN"] = existingPatient.ID_BN;
+            }
 
             try {
                 const { error } = await upsertRecordSafely("Thongtin", payload, true);

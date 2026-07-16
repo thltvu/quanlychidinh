@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,35 +20,41 @@
             font-family: 'Inter', sans-serif;
             background-color: #f0f4f8;
         }
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
         }
+
         ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #cbd5e1;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
     </style>
 </head>
+
 <body class="min-h-screen flex flex-col">
 
     <!-- 1. LOGIN VIEW -->
     <div id="login-view" class="min-h-screen flex items-center justify-center p-4 bg-slate-100 hidden">
         <div class="bg-white max-w-md w-full p-8 rounded-3xl shadow-xl border border-slate-200">
             <div class="text-center mb-6">
-                <div class="bg-blue-600 text-white w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3.5 shadow-lg shadow-blue-200">
+                <div
+                    class="bg-blue-600 text-white w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-3.5 shadow-lg shadow-blue-200">
                     <i class="fa-solid fa-user-shield text-2xl"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-slate-800">Đăng Nhập Hệ Thống</h2>
             </div>
-            
+
             <div class="space-y-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 mb-1.5">Tên tài khoản:</label>
@@ -55,7 +62,8 @@
                         <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
                             <i class="fa-solid fa-user"></i>
                         </span>
-                        <input type="text" id="login-username" placeholder="Nhập tài khoản..." class="w-full text-sm pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" id="login-username" placeholder="Nhập tài khoản..."
+                            class="w-full text-sm pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div>
@@ -64,11 +72,13 @@
                         <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
                             <i class="fa-solid fa-lock"></i>
                         </span>
-                        <input type="password" id="login-password" placeholder="Nhập mật khẩu..." class="w-full text-sm pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="password" id="login-password" placeholder="Nhập mật khẩu..."
+                            class="w-full text-sm pl-10 pr-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
-                
-                <button onclick="handleLogin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-200 transition mt-6">
+
+                <button onclick="handleLogin()"
+                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-xl shadow-lg shadow-blue-200 transition mt-6">
                     ĐĂNG NHẬP
                 </button>
             </div>
@@ -78,7 +88,8 @@
     <!-- 2. MAIN APP VIEW -->
     <div id="app-view" class="min-h-screen flex flex-col hidden">
         <!-- HEADER / CONFIG BAR -->
-        <header class="bg-white border-b border-slate-200 shadow-sm px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+        <header
+            class="bg-white border-b border-slate-200 shadow-sm px-6 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex items-center gap-3">
                 <div class="bg-blue-600 text-white p-2.5 rounded-lg shadow-md shadow-blue-200">
                     <i class="fa-solid fa-hospital-user text-xl"></i>
@@ -90,23 +101,27 @@
 
             <!-- Trạng thái kết nối và người dùng -->
             <div class="flex flex-wrap items-center gap-4 w-full md:w-auto justify-end">
-                <div id="db-status-container" class="flex items-center gap-2 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
+                <div id="db-status-container"
+                    class="flex items-center gap-2 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200">
                     <span id="db-status-dot" class="w-2.5 h-2.5 rounded-full bg-red-500"></span>
                     <span id="db-status-text" class="text-xs font-semibold text-slate-600">Đang kết nối DB...</span>
                 </div>
-                
+
                 <!-- Người dùng đang đăng nhập -->
                 <div class="flex items-center gap-4">
                     <div class="flex items-center gap-2.5 bg-slate-50 px-3.5 py-1.5 rounded-xl border border-slate-200">
-                        <div class="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                        <div
+                            class="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
                             <i class="fa-regular fa-user"></i>
                         </div>
                         <div class="text-left">
                             <div class="text-xs font-bold text-slate-800" id="user-display-name">---</div>
-                            <div class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider" id="user-display-role">---</div>
+                            <div class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider"
+                                id="user-display-role">---</div>
                         </div>
                     </div>
-                    <button onclick="handleLogout()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-800 text-xs font-bold px-3 py-2.5 rounded-xl transition flex items-center gap-1.5 border border-slate-200">
+                    <button onclick="handleLogout()"
+                        class="bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-800 text-xs font-bold px-3 py-2.5 rounded-xl transition flex items-center gap-1.5 border border-slate-200">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất
                     </button>
                 </div>
@@ -115,10 +130,10 @@
 
         <!-- MAIN BODY -->
         <main class="flex-1 p-6 grid grid-cols-1 xl:grid-cols-4 gap-6 max-w-[1600px] w-full mx-auto">
-            
+
             <!-- CỘT TRÁI: FORM NHẬP & BỘ LỌC -->
             <div class="xl:col-span-1 flex flex-col gap-6">
-                
+
                 <!-- 1. Bộ Lọc Dữ Liệu -->
                 <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm">
                     <h2 class="text-sm font-bold text-slate-800 mb-4 flex items-center gap-2">
@@ -127,21 +142,26 @@
                     <div class="space-y-3.5">
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1.5">Từ ngày:</label>
-                            <input type="text" id="filter-start-date" placeholder="Chọn ngày..." class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="text" id="filter-start-date" placeholder="Chọn ngày..."
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1.5">Đến ngày:</label>
-                            <input type="text" id="filter-end-date" placeholder="Chọn ngày..." class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="text" id="filter-end-date" placeholder="Chọn ngày..."
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div class="pt-2 grid grid-cols-1 gap-2">
-                            <button onclick="fetchMainRecords()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2.5 rounded-xl shadow-md shadow-blue-100 transition flex items-center justify-center gap-2">
+                            <button onclick="fetchMainRecords()"
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold py-2.5 rounded-xl shadow-md shadow-blue-100 transition flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-arrows-rotate"></i> Lọc Dữ Liệu
                             </button>
                             <div class="grid grid-cols-2 gap-2">
-                                <button onclick="exportExcelMerge()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
+                                <button onclick="exportExcelMerge()"
+                                    class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
                                     <i class="fa-regular fa-file-excel"></i> Xuất Gộp Ô
                                 </button>
-                                <button onclick="exportExcelSheets()" class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
+                                <button onclick="exportExcelSheets()"
+                                    class="bg-teal-600 hover:bg-teal-700 text-white text-xs font-bold py-2 rounded-xl transition flex items-center justify-center gap-1.5">
                                     <i class="fa-regular fa-copy"></i> Chia Sheets
                                 </button>
                             </div>
@@ -155,31 +175,39 @@
                         <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
                             <i class="fa-solid fa-file-medical text-blue-600"></i> Nhập Liệu Chỉ Định
                         </h2>
-                        <button onclick="openCategoryModal()" class="text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded-lg transition flex items-center gap-1.5">
+                        <button onclick="openCategoryModal()"
+                            class="text-xs font-bold bg-slate-800 hover:bg-slate-900 text-white px-3 py-1.5 rounded-lg transition flex items-center gap-1.5">
                             <i class="fa-solid fa-gear"></i> Cài Đặt Danh Mục
                         </button>
                     </div>
-                    
+
                     <div class="space-y-3.5">
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1">Ngày điều trị:</label>
-                            <input type="text" id="input-date" placeholder="VD gõ nhanh: 14072026" class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="text" id="input-date" placeholder="VD gõ nhanh: 14072026"
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1">Tên bệnh nhân:</label>
-                            <input type="text" id="input-name" placeholder="Nhập tên bệnh nhân..." class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 capitalize">
+                            <input type="text" id="input-name" placeholder="Nhập tên bệnh nhân..."
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 capitalize">
                         </div>
-                        
+
                         <!-- Custom Select Dropdown cho Chỉ Định -->
                         <div class="relative" id="chidinh-container">
                             <label class="block text-xs font-semibold text-slate-500 mb-1">Chỉ định:</label>
                             <div class="relative">
-                                <input type="text" id="input-chidinh" autocomplete="off" placeholder="Gõ để tìm nhanh..." class="w-full text-sm pl-3.5 pr-10 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
-                                <button type="button" class="absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400 hover:text-slate-600 focus:outline-none" onclick="toggleChidinhDropdown(event)">
+                                <input type="text" id="input-chidinh" autocomplete="off"
+                                    placeholder="Gõ để tìm nhanh..."
+                                    class="w-full text-sm pl-3.5 pr-10 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                                <button type="button"
+                                    class="absolute inset-y-0 right-0 flex items-center px-3.5 text-slate-400 hover:text-slate-600 focus:outline-none"
+                                    onclick="toggleChidinhDropdown(event)">
                                     <i class="fa-solid fa-chevron-down"></i>
                                 </button>
                             </div>
-                            <ul id="chidinh-dropdown" class="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg hidden max-h-48 overflow-y-auto py-1 text-sm text-slate-700">
+                            <ul id="chidinh-dropdown"
+                                class="absolute z-50 w-full mt-1 bg-white border border-slate-200 rounded-xl shadow-lg hidden max-h-48 overflow-y-auto py-1 text-sm text-slate-700">
                                 <!-- Options dynamically generated -->
                             </ul>
                         </div>
@@ -187,49 +215,61 @@
 
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1">Máy móc sử dụng:</label>
-                            <select id="input-may" class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
+                            <select id="input-may"
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-500 mb-1">Giờ bắt đầu:</label>
-                                <input type="time" id="input-time-start" onchange="calculateEndTime()" class="w-full text-sm px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="time" id="input-time-start" onchange="calculateEndTime()"
+                                    class="w-full text-sm px-3 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-500 mb-1">Giờ kết thúc:</label>
-                                <input type="time" id="input-time-end" readonly class="w-full text-sm px-3 py-2 rounded-xl border border-slate-300 bg-slate-100 text-slate-500 focus:outline-none cursor-not-allowed">
+                                <input type="time" id="input-time-end" readonly
+                                    class="w-full text-sm px-3 py-2 rounded-xl border border-slate-300 bg-slate-100 text-slate-500 focus:outline-none cursor-not-allowed">
                             </div>
                         </div>
-                        
+
                         <div class="flex items-center gap-2 py-1">
-                            <input type="checkbox" id="input-ekip" class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer">
-                            <label for="input-ekip" class="text-xs font-bold text-blue-600 select-none cursor-pointer">Kíp (EKIP)</label>
+                            <input type="checkbox" id="input-ekip"
+                                class="w-4 h-4 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer">
+                            <label for="input-ekip"
+                                class="text-xs font-bold text-blue-600 select-none cursor-pointer">Kíp (EKIP)</label>
                         </div>
 
-                    	<div>
+                        <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1">Người thực hiện:</label>
-                            <select id="input-nguoith" class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
+                            <select id="input-nguoith"
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1">Người tường trình:</label>
-                            <select id="input-nguoitt" class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
+                            <select id="input-nguoitt"
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-500 mb-1">Người giúp việc:</label>
-                            <select id="input-nguoigv" class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
+                            <select id="input-nguoigv"
+                                class="w-full text-sm px-3.5 py-2 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"></select>
                         </div>
 
                         <!-- ACTION BUTTONS -->
                         <div class="pt-3 grid grid-cols-2 gap-2">
-                            <button onclick="resetInputForm()" class="bg-slate-400 hover:bg-slate-500 text-white text-xs font-bold py-2.5 rounded-xl transition">
+                            <button onclick="resetInputForm()"
+                                class="bg-slate-400 hover:bg-slate-500 text-white text-xs font-bold py-2.5 rounded-xl transition">
                                 Làm Mới
                             </button>
-                            <button id="btn-edit-case" onclick="onEditCaseClicked()" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-2.5 rounded-xl transition">
+                            <button id="btn-edit-case" onclick="onEditCaseClicked()"
+                                class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold py-2.5 rounded-xl transition">
                                 Sửa Ca
                             </button>
-                            <button id="btn-delete-case" onclick="onDeleteCaseClicked()" class="bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold py-2.5 rounded-xl transition">
+                            <button id="btn-delete-case" onclick="onDeleteCaseClicked()"
+                                class="bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold py-2.5 rounded-xl transition">
                                 Xóa Ca
                             </button>
-                            <button onclick="onAddCaseClicked()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl transition">
+                            <button onclick="onAddCaseClicked()"
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2.5 rounded-xl transition">
                                 Thêm
                             </button>
                         </div>
@@ -238,14 +278,29 @@
             </div>
 
             <!-- CỘT PHẢI: GRIDVIEW LIVE VIEW -->
-            <div class="xl:col-span-3 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col h-[700px] xl:h-auto">
-                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex justify-between items-center">
+            <!-- CỘT PHẢI: GRIDVIEW LIVE VIEW -->
+            <!-- Đổi xl:h-auto thành h-[850px] để cố định chiều cao (hiển thị tầm 20 dòng) và tạo thanh cuộn -->
+            <div
+                class="xl:col-span-3 bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden flex flex-col h-[850px]">
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-200 flex flex-wrap justify-between items-center gap-3">
                     <h2 class="text-sm font-bold text-slate-800 flex items-center gap-2">
-                        <i class="fa-solid fa-list-check text-blue-600"></i> Bảng Theo Dõi Điều Trị (Live View)
+                        <i class="fa-solid fa-list-check text-blue-600"></i> Bảng Theo Dõi (Live View)
                     </h2>
-                    <div class="flex items-center gap-3">
-                        <span id="loading-spinner" class="hidden text-blue-600 animate-spin"><i class="fa-solid fa-circle-notch"></i></span>
-                        <span class="text-xs bg-blue-50 text-blue-700 font-bold px-3 py-1 rounded-full" id="record-count">0 hồ sơ</span>
+            
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <!-- THÊM Ô TÌM KIẾM Ở ĐÂY -->
+                        <div class="relative w-full sm:w-56">
+                            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                            <input type="text" id="search-patient" placeholder="Tìm bệnh nhân..." oninput="renderMainTable()"
+                                class="w-full text-sm pl-9 pr-3 py-1.5 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white">
+                        </div>
+            
+                        <span id="loading-spinner" class="hidden text-blue-600 animate-spin"><i
+                                class="fa-solid fa-circle-notch"></i></span>
+                        <span class="text-xs bg-blue-50 text-blue-700 font-bold px-3 py-1.5 rounded-xl whitespace-nowrap"
+                            id="record-count">0 hồ sơ</span>
                     </div>
                 </div>
                 <div class="flex-1 overflow-auto">
@@ -264,9 +319,10 @@
                                 <th class="px-4 py-3.5">Người Giúp Việc</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100" id="table-body">
+                        <tbody id="table-body">
                             <tr>
-                                <td colspan="10" class="text-center py-10 text-slate-400">Đang tải dữ liệu hoặc cấu hình kết nối database...</td>
+                                <td colspan="10" class="text-center py-10 text-slate-400">Đang tải dữ liệu hoặc cấu hình
+                                    kết nối database...</td>
                             </tr>
                         </tbody>
                     </table>
@@ -279,41 +335,55 @@
     <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2"></div>
 
     <!-- MODAL: CÀI ĐẶT DANH MỤC -->
-    <div id="cat-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-4xl rounded-2xl shadow-xl flex flex-col overflow-hidden border border-slate-200 h-[550px]">
+    <div id="cat-modal"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 hidden flex items-center justify-center p-4">
+        <div
+            class="bg-white w-full max-w-4xl rounded-2xl shadow-xl flex flex-col overflow-hidden border border-slate-200 h-[550px]">
             <div class="bg-slate-800 text-white px-6 py-4 flex justify-between items-center">
-                <h3 class="text-base font-bold flex items-center gap-2"><i class="fa-solid fa-list-ul"></i> Cài đặt Quản lý Danh mục (Live DB)</h3>
-                <button onclick="closeCategoryModal()" class="text-slate-400 hover:text-white transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+                <h3 class="text-base font-bold flex items-center gap-2"><i class="fa-solid fa-list-ul"></i> Cài đặt Quản
+                    lý Danh mục (Live DB)</h3>
+                <button onclick="closeCategoryModal()" class="text-slate-400 hover:text-white transition"><i
+                        class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            
+
             <div class="flex-1 flex overflow-hidden">
                 <!-- Nhóm danh mục (Cột trái) -->
                 <div class="w-1/4 border-r border-slate-200 bg-slate-50 p-4">
-                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nhóm danh mục:</label>
+                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Nhóm danh
+                        mục:</label>
                     <div class="space-y-1.5" id="cat-tabs">
                         <!-- Sẽ render động dựa theo quyền trong JS -->
                     </div>
                 </div>
-                
+
                 <!-- Bảng chi tiết danh mục (Cột phải) -->
                 <div class="flex-1 flex flex-col p-6">
                     <div class="flex justify-between items-center mb-3">
-                        <h4 class="text-sm font-bold text-slate-800" id="cat-title-detail">Chi tiết danh sách các mục</h4>
+                        <h4 class="text-sm font-bold text-slate-800" id="cat-title-detail">Chi tiết danh sách các mục
+                        </h4>
                         <div class="flex gap-2">
-                            <button onclick="addCategoryItem()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition"><i class="fa-solid fa-plus"></i> Thêm mới</button>
-                            <button onclick="editCategoryItem()" class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition"><i class="fa-solid fa-pen"></i> Sửa</button>
-                            <button onclick="deleteCategoryItem()" class="bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition"><i class="fa-solid fa-trash"></i> Xóa</button>
+                            <button onclick="addCategoryItem()"
+                                class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition"><i
+                                    class="fa-solid fa-plus"></i> Thêm mới</button>
+                            <button onclick="editCategoryItem()"
+                                class="bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition"><i
+                                    class="fa-solid fa-pen"></i> Sửa</button>
+                            <button onclick="deleteCategoryItem()"
+                                class="bg-rose-500 hover:bg-rose-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition"><i
+                                    class="fa-solid fa-trash"></i> Xóa</button>
                         </div>
                     </div>
-                    
+
                     <div class="flex-1 border border-slate-200 rounded-xl overflow-auto bg-white">
                         <table class="w-full text-sm text-left border-collapse" id="cat-table">
                             <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200 sticky top-0">
                                 <tr>
                                     <th class="px-4 py-3 border-r border-slate-100 w-12 text-center">STT</th>
                                     <th class="px-4 py-3 border-r border-slate-100">Tên mục</th>
-                                    <th class="px-4 py-3 border-r border-slate-100 cat-col-duration">Thời gian (phút)</th>
-                                    <th class="px-4 py-3 cat-col-machines">Gộp nhóm máy (Click để chọn máy trong danh mục)</th>
+                                    <th class="px-4 py-3 border-r border-slate-100 cat-col-duration">Thời gian (phút)
+                                    </th>
+                                    <th class="px-4 py-3 cat-col-machines">Gộp nhóm máy (Click để chọn máy trong danh
+                                        mục)</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-slate-100" id="cat-table-body">
@@ -327,18 +397,25 @@
     </div>
 
     <!-- MODAL CHỌN MÁY LIÊN KẾT (Machine Linker Checkbox Modal) -->
-    <div id="linker-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-2xl shadow-xl border border-slate-200 overflow-hidden flex flex-col max-h-[450px]">
+    <div id="linker-modal"
+        class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div
+            class="bg-white w-full max-w-md rounded-2xl shadow-xl border border-slate-200 overflow-hidden flex flex-col max-h-[450px]">
             <div class="bg-slate-800 text-white px-5 py-3.5 flex justify-between items-center">
-                <h4 class="text-sm font-bold flex items-center gap-1.5" id="linker-title"><i class="fa-solid fa-link"></i> Gộp nhóm Máy móc</h4>
-                <button onclick="closeLinkerModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+                <h4 class="text-sm font-bold flex items-center gap-1.5" id="linker-title"><i
+                        class="fa-solid fa-link"></i> Gộp nhóm Máy móc</h4>
+                <button onclick="closeLinkerModal()" class="text-slate-400 hover:text-white"><i
+                        class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="p-5 flex-1 overflow-auto space-y-2.5" id="linker-checklist-container">
                 <!-- Checkboxes -->
             </div>
             <div class="bg-slate-50 px-5 py-3 border-t border-slate-200 flex justify-end gap-2">
-                <button onclick="closeLinkerModal()" class="text-xs bg-slate-300 hover:bg-slate-400 font-bold px-4 py-2 rounded-lg transition text-slate-700">Hủy</button>
-                <button onclick="saveMachineLink()" class="text-xs bg-blue-600 hover:bg-blue-700 font-bold px-4 py-2 rounded-lg text-white transition">Xác nhận</button>
+                <button onclick="closeLinkerModal()"
+                    class="text-xs bg-slate-300 hover:bg-slate-400 font-bold px-4 py-2 rounded-lg transition text-slate-700">Hủy</button>
+                <button onclick="saveMachineLink()"
+                    class="text-xs bg-blue-600 hover:bg-blue-700 font-bold px-4 py-2 rounded-lg text-white transition">Xác
+                    nhận</button>
             </div>
         </div>
     </div>
@@ -367,7 +444,7 @@
         };
 
         // KHO KHỞI TẠO & AUTO-CONNECT
-        window.onload = function() {
+        window.onload = function () {
             // Tải cấu hình tự động từ tệp .env ẩn
             loadEnvAndConnect();
 
@@ -381,7 +458,7 @@
             setupDateInputAutoformat("input-date");
             setupDateInputAutoformat("filter-start-date");
             setupDateInputAutoformat("filter-end-date");
-            
+
             // Khởi tạo các event cho dropdown Chỉ Định tùy chỉnh
             setupChidinhDropdownEvents();
         };
@@ -389,7 +466,7 @@
         // 1. KẾT NỐI SUPABASE TỰ ĐỘNG TỪ .ENV
         async function loadEnvAndConnect() {
             let connected = false;
-            
+
             // Thử đọc env.txt trước (vì .env thường bị web server chặn 404)
             try {
                 const response = await fetch('env.txt');
@@ -418,7 +495,7 @@
             if (!connected) {
                 const savedUrl = localStorage.getItem("medical_sb_url");
                 const savedKey = localStorage.getItem("medical_sb_key");
-                
+
                 if (savedUrl && savedKey) {
                     initializeSupabase(savedUrl, savedKey);
                 } else {
@@ -433,12 +510,12 @@
             text.split('\n').forEach(line => {
                 const trimmedLine = line.trim();
                 if (!trimmedLine || trimmedLine.startsWith('#')) return;
-                
+
                 const match = trimmedLine.match(/^([\w.-]+)\s*=\s*(.*)?$/);
                 if (match) {
                     const key = match[1].trim();
                     let value = match[2] ? match[2].trim() : '';
-                    
+
                     if (value.startsWith('"') && value.endsWith('"')) value = value.slice(1, -1);
                     if (value.startsWith("'") && value.endsWith("'")) value = value.slice(1, -1);
                     env[key] = value;
@@ -460,7 +537,7 @@
                 supabaseClient = supabase.createClient(url, key);
                 updateConnectionUI(true, "Đã kết nối Live DB");
                 showToast("Kết nối Supabase thành công!", "success");
-                
+
                 // KIỂM TRA TRẠNG THÁI ĐĂNG NHẬP
                 checkLoginState();
             } catch (err) {
@@ -474,7 +551,7 @@
         function updateConnectionUI(connected, message) {
             const dots = ["db-status-dot"];
             const texts = ["db-status-text"];
-            
+
             dots.forEach(id => {
                 const el = document.getElementById(id);
                 if (el) el.className = connected ? "w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" : "w-2.5 h-2.5 rounded-full bg-red-500";
@@ -506,7 +583,7 @@
             // Xác định đúng tên bảng trước
             let activeTable = tableName;
             let checkRes = await supabaseClient.from(activeTable).select(selectQuery).limit(1);
-            
+
             if (checkRes.error && (checkRes.error.code === "PGRST200" || checkRes.error.message.includes("does not exist"))) {
                 activeTable = tableName.toLowerCase();
             }
@@ -606,17 +683,17 @@
                 // NẾU KHÔNG TÌM THẤY TÀI KHOẢN, HÃY KIỂM TRA XEM BẢNG CÓ TRỐNG KHÔNG (ĐỂ TỰ ĐỘNG KHỞI TẠO TÀI KHOẢN MẪU)
                 if (!data) {
                     const { data: allUsers, error: checkEmptyError } = await supabaseClient.from(tableToUse).select("*").limit(5);
-                    
+
                     if (!checkEmptyError && (!allUsers || allUsers.length === 0)) {
                         // Bảng hoàn toàn trống! Tự động tạo tài khoản mặc định
                         showToast("Phát hiện bảng Account trống! Đang tự động tạo tài khoản mặc định...", "warning");
-                        
+
                         // Đọc keys của bảng nếu có để biết viết hoa hay viết thường
                         const defaultUsers = [
                             { username: 'admin', password: 'admin123', quyen: 'AD' },
                             { username: 'nhanvien', password: 'user123', quyen: 'US' }
                         ];
-                        
+
                         // Thử insert lowercase
                         let seedError = (await supabaseClient.from(tableToUse).insert(defaultUsers)).error;
                         if (seedError) {
@@ -654,7 +731,7 @@
                     };
                     sessionStorage.setItem("clinic_user", JSON.stringify(currentUser));
                     showToast(`Chào mừng trở lại, ${username}!`, "success");
-                    
+
                     // Chuyển màn hình và tải dữ liệu
                     showAppView();
                     loadCategoriesFromDB();
@@ -710,7 +787,7 @@
                             console.error(`Lỗi tải danh mục ${cat}:`, response.error);
                             continue;
                         }
-                        
+
                         const data = response.data;
                         if (cat === "Máy móc") {
                             categoriesData["Máy móc"] = ["Không dùng máy"];
@@ -733,7 +810,7 @@
                                     if (cat === "Chỉ định") {
                                         const actualTimeCol = Object.keys(r).find(k => ["thoigian", "thoi_gian", "thoigian"].includes(k.toLowerCase())) || "Thoigian";
                                         serviceDurationMap[name] = r[actualTimeCol] || 15;
-                                        
+
                                         const actualLinkCol = Object.keys(r).find(k => ["may_lien_ket", "maylienket"].includes(k.toLowerCase())) || "may_lien_ket";
                                         const mayLkRaw = r[actualLinkCol] || "";
                                         if (mayLkRaw) {
@@ -752,7 +829,7 @@
                         console.error(`Lỗi nghiêm trọng khi đọc bảng ${cat}:`, tableErr);
                     }
                 }
-                
+
                 // Đổ dữ liệu vào các select combobox ngoài màn hình chính
                 refreshComboboxes();
                 // Tải danh sách giao dịch chính
@@ -773,7 +850,7 @@
             // Thay vì dùng select thường, khởi tạo dữ liệu cho Custom Dropdown Chỉ định
             populateChidinhDropdown(categoriesData["Chỉ định"]);
             onChidinhChange(); // Lọc máy móc tương ứng sau khi khởi tạo
-            
+
             populateSelect("input-nguoith", categoriesData["Nhân viên"]);
             populateSelect("input-nguoitt", categoriesData["Nhân viên"]);
             populateSelect("input-nguoigv", categoriesData["Nhân viên"], true); // Cho phép trống
@@ -783,7 +860,7 @@
             const select = document.getElementById(elemId);
             const currentVal = select.value;
             select.innerHTML = "";
-            
+
             if (allowEmpty) {
                 const emptyOpt = document.createElement("option");
                 emptyOpt.value = "";
@@ -806,12 +883,12 @@
         // ==========================================
         // CÁC HÀM XỬ LÝ CUSTOM DROPDOWN CHỈ ĐỊNH
         // ==========================================
-        
+
         function populateChidinhDropdown(list) {
             const dropdown = document.getElementById("chidinh-dropdown");
             const input = document.getElementById("input-chidinh");
             dropdown.innerHTML = "";
-            
+
             if (list.length === 0) {
                 dropdown.innerHTML = '<li class="px-3.5 py-2 text-slate-400 text-center italic text-xs">Không có dữ liệu</li>';
             }
@@ -828,7 +905,7 @@
                 };
                 dropdown.appendChild(li);
             });
-            
+
             // Xử lý giữ/reset giá trị hiện tại
             if (!input.value && list.length > 0) {
                 input.value = list[0];
@@ -839,14 +916,14 @@
 
         function setupChidinhDropdownEvents() {
             const input = document.getElementById("input-chidinh");
-            
+
             // Khi người dùng gõ vào ô
             input.addEventListener("input", () => {
                 document.getElementById("chidinh-dropdown").classList.remove("hidden");
                 filterChidinhDropdown();
                 onChidinhChange(); // Update realtime máy móc / thời gian
             });
-            
+
             // Khi trỏ chuột vào ô
             input.addEventListener("focus", () => {
                 document.getElementById("chidinh-dropdown").classList.remove("hidden");
@@ -858,7 +935,7 @@
             if (e) e.stopPropagation();
             const dropdown = document.getElementById("chidinh-dropdown");
             const input = document.getElementById("input-chidinh");
-            
+
             if (dropdown.classList.contains("hidden")) {
                 dropdown.classList.remove("hidden");
                 input.focus();
@@ -885,7 +962,7 @@
 
                 const txtValue = items[i].textContent || items[i].innerText;
                 const txtNormalized = removeVietnameseTones(txtValue.toLowerCase());
-                
+
                 if (txtNormalized.indexOf(filter) > -1) {
                     items[i].style.display = "";
                     hasVisible = true;
@@ -893,7 +970,7 @@
                     items[i].style.display = "none";
                 }
             }
-            
+
             if (!hasVisible && filterRaw !== "") {
                 dropdown.classList.add("hidden");
             } else if (items.length > 0) {
@@ -921,7 +998,7 @@
         }
 
         // Event đóng dropdown khi nhấp ra ngoài
-        document.addEventListener("click", function(e) {
+        document.addEventListener("click", function (e) {
             const container = document.getElementById("chidinh-container");
             const dropdown = document.getElementById("chidinh-dropdown");
             if (container && !container.contains(e.target) && dropdown) {
@@ -961,7 +1038,7 @@
             const chidinhName = document.getElementById("input-chidinh").value;
             const duration = serviceDurationMap[chidinhName] || 15; // Mặc định 15p nếu gõ sai tên
             const startTimeStr = document.getElementById("input-time-start").value;
-            
+
             if (!startTimeStr) return;
 
             const [hours, minutes] = startTimeStr.split(":").map(Number);
@@ -995,7 +1072,7 @@
             }
         }
 
-        document.getElementById("input-name").addEventListener("input", function(e) {
+        document.getElementById("input-name").addEventListener("input", function (e) {
             onNameChanged(e.target.value);
         });
 
@@ -1004,10 +1081,10 @@
             if (!supabaseClient) return;
             const startRaw = document.getElementById("filter-start-date").value;
             const endRaw = document.getElementById("filter-end-date").value;
-            
+
             let startDate = "";
             let endDate = "";
-            
+
             try {
                 startDate = parseVNToISO(startRaw);
                 endDate = parseVNToISO(endRaw);
@@ -1025,8 +1102,8 @@
                 let from = 0;
                 const limit = 1000;
                 let hasMore = true;
-                
-                while(hasMore) {
+
+                while (hasMore) {
                     let to = from + limit - 1;
                     let { data, error } = await supabaseClient
                         .from(tableName)
@@ -1036,9 +1113,9 @@
                         .order(dateCol, { ascending: true })
                         .order(orderNameCol, { ascending: true })
                         .range(from, to);
-                        
+
                     if (error) throw error;
-                    
+
                     if (data && data.length > 0) {
                         results = results.concat(data);
                         if (data.length < limit) hasMore = false; // Đã lấy đến trang cuối
@@ -1056,8 +1133,8 @@
                 let from = 0;
                 let limit = 1000;
                 let hasMore = true;
-                
-                while(hasMore) {
+
+                while (hasMore) {
                     let to = from + limit - 1;
                     let { data, error } = await supabaseClient
                         .from(tableName)
@@ -1065,7 +1142,7 @@
                         .gte(dateCol, startDate)
                         .lte(dateCol, endDate)
                         .range(from, to);
-                        
+
                     if (error) throw error;
                     if (data && data.length > 0) {
                         results = results.concat(data);
@@ -1123,7 +1200,7 @@
                     } catch (e) {
                         flatData = await fetchFlatAllPages("thongtin", "ngay");
                     }
-                    
+
                     // Map thủ công bằng bộ nhớ RAM
                     mainRecords = flatData.map(r => {
                         const rNgay = r.Ngay || r.ngay;
@@ -1131,20 +1208,20 @@
                         const rTGBatDau = r.TG_bat_dau || r.tg_bat_dau;
                         const rTGKT = r.TG_KT || r.tg_kt;
                         const rEkip = r.EKIP !== undefined ? r.EKIP : r.ekip;
-                        
+
                         // Áp dụng lookup RAM từ catMap và categoriesData
                         const macdVal = r.macd;
                         const chidinhName = Object.keys(catMap["Chỉ định"]).find(k => catMap["Chỉ định"][k] === macdVal) || "";
-                        
+
                         const mamayVal = r.Mamay || r.mamay;
                         const mayName = Object.keys(catMap["Máy móc"]).find(k => catMap["Máy móc"][k] === mamayVal) || "Không dùng máy";
-                        
+
                         const nguoithVal = r.Nguoi_TH || r.nguoi_th;
                         const nguoithName = Object.keys(catMap["Nhân viên"]).find(k => catMap["Nhân viên"][k] === nguoithVal) || "";
-                        
+
                         const nguoittVal = r.Nguoi_TT || r.nguoi_tt;
                         const nguoittName = Object.keys(catMap["Nhân viên"]).find(k => catMap["Nhân viên"][k] === nguoittVal) || "";
-                        
+
                         const nguoigvVal = r.Nguoi_GV || r.nguoi_gv;
                         const nguoigvName = Object.keys(catMap["Nhân viên"]).find(k => catMap["Nhân viên"][k] === nguoigvVal) || "";
 
@@ -1237,79 +1314,106 @@
             }
         }
 
-        // 4. HIỂN THỊ LÊN LƯỚI & GỘP Ô THÔNG MINH (DYNAMIC MERGING)
-        function renderMainTable() {
-            const tbody = document.getElementById("table-body");
-            tbody.innerHTML = "";
-            document.getElementById("record-count").innerText = `${mainRecords.length} hồ sơ`;
+        // 4. HIỂN THỊ LÊN LƯỚI & GỘP Ô THÔNG MINH (KÈM TÌM KIẾM VÀ TÔ MÀU THEO NGƯỜI)
+            function renderMainTable() {
+                const tbody = document.getElementById("table-body");
+                tbody.innerHTML = "";
 
-            if (mainRecords.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="10" class="text-center py-10 text-slate-400">Không có bản ghi nào phù hợp trong ngày lọc.</td></tr>`;
-                return;
-            }
+                // 1. LẤY TỪ KHÓA TÌM KIẾM
+                const searchInput = document.getElementById("search-patient");
+                const keyword = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
-            // Tính toán rowspan cho cột Ngày (Cột 0)
-            const dateSpanMap = [];
-            let i = 0;
-            while (i < mainRecords.length) {
-                let j = i + 1;
-                while (j < mainRecords.length && mainRecords[j].Ngay === mainRecords[i].Ngay) {
-                    j++;
-                }
-                const span = j - i;
-                dateSpanMap.push({ index: i, span: span });
-                i = j;
-            }
-
-            // Tính toán rowspan cho cột Tên Bệnh Nhân (Cột 1) dựa trên đồng trùng cả Ngày và Tên BN
-            // Tính toán rowspan cho cột Tên Bệnh Nhân (Cột 1) dựa trên đồng trùng cả Ngày và ID_BN
-            const nameSpanMap = [];
-            i = 0;
-            while (i < mainRecords.length) {
-                let j = i + 1;
-                while (j < mainRecords.length &&
-                    mainRecords[j].Ngay === mainRecords[i].Ngay &&
-                    mainRecords[j].ID_BN === mainRecords[i].ID_BN) {
-                    j++;
-                }
-                const span = j - i;
-                nameSpanMap.push({ index: i, span: span });
-                i = j;
-            }
-
-            // Tạo các hàng HTML
-            mainRecords.forEach((r, idx) => {
-                const tr = document.createElement("tr");
-                tr.className = "hover:bg-blue-50/40 transition cursor-pointer " + (selectedRecordId === r.matt ? "bg-blue-50" : "");
-                tr.onclick = () => selectRecordForEdit(r);
-
-                const dateVN = parseISOToVN(r.Ngay);
-                const chidinhName = r.Chidinh ? (r.Chidinh.Ten_chidinh || r.Chidinh.ten_chidinh) : "";
-                const mayName = r.May ? (r.May.tenmay || r.May.Tenmay) : "Không dùng máy";
-                const startStr = r.TG_bat_dau ? r.TG_bat_dau.slice(0, 5) : "";
-                const endStr = r.TG_KT ? r.TG_KT.slice(0, 5) : "";
-                const nTH = r.NguoiTH ? r.NguoiTH.tennv : "";
-                const nTT = r.NguoiTT ? r.NguoiTT.tennv : "";
-                const nGV = r.NguoiGV ? r.NguoiGV.tennv : "";
-                const ekipStr = r.EKIP ? "x" : "";
-
-                // HTML cho các cột
-                let tdHtml = "";
-
-                // Cột 0: Ngày (Rowspan)
-                const dateMeta = dateSpanMap.find(m => m.index === idx);
-                if (dateMeta) {
-                    tdHtml += `<td rowspan="${dateMeta.span}" class="px-4 py-3 text-center border-r border-slate-200 font-medium text-slate-600 bg-white">${dateVN}</td>`;
+                // 2. LỌC DỮ LIỆU THEO TÊN
+                let filteredRecords = mainRecords;
+                if (keyword) {
+                    filteredRecords = mainRecords.filter(r => r.Ten_BN && r.Ten_BN.toLowerCase().includes(keyword));
                 }
 
-                // Cột 1: Tên BN (Rowspan)
-                const nameMeta = nameSpanMap.find(m => m.index === idx);
-                if (nameMeta) {
-                    tdHtml += `<td rowspan="${nameMeta.span}" class="px-6 py-3 font-semibold text-slate-800 border-r border-slate-200 bg-white">${r.Ten_BN}</td>`;
+                document.getElementById("record-count").innerText = `${filteredRecords.length} hồ sơ`;
+
+                if (filteredRecords.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="10" class="text-center py-10 text-slate-400">Không có bản ghi nào phù hợp.</td></tr>`;
+                    return;
                 }
 
-                // Các cột còn lại
-                tdHtml += `
+                // Tính toán rowspan cho cột Ngày (Cột 0) TRÊN DỮ LIỆU ĐÃ LỌC
+                const dateSpanMap = [];
+                let i = 0;
+                while (i < filteredRecords.length) {
+                    let j = i + 1;
+                    while (j < filteredRecords.length && filteredRecords[j].Ngay === filteredRecords[i].Ngay) {
+                        j++;
+                    }
+                    const span = j - i;
+                    dateSpanMap.push({ index: i, span: span });
+                    i = j;
+                }
+
+                // Tính toán rowspan cho cột Tên Bệnh Nhân (Cột 1) TRÊN DỮ LIỆU ĐÃ LỌC
+                const nameSpanMap = [];
+                i = 0;
+                while (i < filteredRecords.length) {
+                    let j = i + 1;
+                    while (j < filteredRecords.length &&
+                        filteredRecords[j].Ngay === filteredRecords[i].Ngay &&
+                        filteredRecords[j].ID_BN === filteredRecords[i].ID_BN) {
+                        j++;
+                    }
+                    const span = j - i;
+                    nameSpanMap.push({ index: i, span: span });
+                    i = j;
+                }
+
+                // BIẾN THEO DÕI ĐỔI MÀU (Trắng / Xanh nhạt) THEO TỪNG BỆNH NHÂN
+                let currentPatientKey = null;
+                let isBlueBg = false;
+
+                // Tạo các hàng HTML
+                filteredRecords.forEach((r, idx) => {
+                    const patientKey = r.Ngay + "_" + r.ID_BN;
+
+                    // Nếu gặp bệnh nhân mới thì đảo màu nền
+                    if (patientKey !== currentPatientKey) {
+                        isBlueBg = !isBlueBg;
+                        currentPatientKey = patientKey;
+                    }
+
+                    // Thiết lập class màu nền
+                    // Thiết lập class màu nền
+                    const rowBgClass = isBlueBg ? "bg-white" : "bg-blue-100"; // Tăng độ đậm của màu xanh
+                    const rowHoverClass = "hover:bg-blue-200 transition cursor-pointer"; // Tăng độ đậm khi rê chuột
+                    const rowSelectedClass = selectedRecordId === r.matt ? "ring-2 ring-blue-400 shadow-md" : "";
+
+                    const tr = document.createElement("tr");
+                    tr.className = `${rowBgClass} ${rowHoverClass} ${rowSelectedClass} border-b border-slate-100`;
+                    tr.onclick = () => selectRecordForEdit(r);
+
+                    const dateVN = parseISOToVN(r.Ngay);
+                    const chidinhName = r.Chidinh ? (r.Chidinh.Ten_chidinh || r.Chidinh.ten_chidinh) : "";
+                    const mayName = r.May ? (r.May.tenmay || r.May.Tenmay) : "Không dùng máy";
+                    const startStr = r.TG_bat_dau ? r.TG_bat_dau.slice(0, 5) : "";
+                    const endStr = r.TG_KT ? r.TG_KT.slice(0, 5) : "";
+                    const nTH = r.NguoiTH ? r.NguoiTH.tennv : "";
+                    const nTT = r.NguoiTT ? r.NguoiTT.tennv : "";
+                    const nGV = r.NguoiGV ? r.NguoiGV.tennv : "";
+                    const ekipStr = r.EKIP ? "x" : "";
+
+                    let tdHtml = "";
+
+                    // Cột 0: Ngày (Rowspan)
+                    const dateMeta = dateSpanMap.find(m => m.index === idx);
+                    if (dateMeta) {
+                        tdHtml += `<td rowspan="${dateMeta.span}" class="px-4 py-3 text-center border-r border-slate-200 font-medium text-slate-600 ${rowBgClass}">${dateVN}</td>`;
+                    }
+
+                    // Cột 1: Tên BN (Rowspan)
+                    const nameMeta = nameSpanMap.find(m => m.index === idx);
+                    if (nameMeta) {
+                        tdHtml += `<td rowspan="${nameMeta.span}" class="px-6 py-3 font-semibold text-slate-800 border-r border-slate-200 ${rowBgClass}">${r.Ten_BN}</td>`;
+                    }
+
+                    // Các cột còn lại (Không set bg cứng để nhận màu từ thẻ tr)
+                    tdHtml += `
                     <td class="px-4 py-3 border-r border-slate-100 text-slate-700 font-medium">${chidinhName}</td>
                     <td class="px-4 py-3 border-r border-slate-100 text-slate-500">${mayName}</td>
                     <td class="px-3 py-3 text-center border-r border-slate-100 text-slate-600 font-mono font-medium">${startStr}</td>
@@ -1320,29 +1424,29 @@
                     <td class="px-4 py-3 text-slate-600">${nGV}</td>
                 `;
 
-                tr.innerHTML = tdHtml;
-                tbody.appendChild(tr);
-            });
-        }
+                    tr.innerHTML = tdHtml;
+                    tbody.appendChild(tr);
+                });
+            }
 
         // Khi click vào 1 ca bệnh nhân trên lưới, đổ ngược thông tin về form
         function selectRecordForEdit(r) {
             selectedRecordId = r.matt;
-            
+
             document.getElementById("input-date").value = parseISOToVN(r.Ngay);
             document.getElementById("input-name").value = r.Ten_BN;
             document.getElementById("input-chidinh").value = r.Chidinh ? (r.Chidinh.Ten_chidinh || r.Chidinh.ten_chidinh) : "";
-            
+
             // Kích hoạt bộ lọc máy móc dựa trên chỉ định vừa chọn
             onChidinhChange();
-            
+
             const mayName = r.May ? (r.May.tenmay || r.May.Tenmay) : "Không dùng máy";
             document.getElementById("input-may").value = mayName;
-            
+
             document.getElementById("input-time-start").value = r.TG_bat_dau ? r.TG_bat_dau.slice(0, 5) : "";
             document.getElementById("input-time-end").value = r.TG_KT ? r.TG_KT.slice(0, 5) : "";
             document.getElementById("input-ekip").checked = !!r.EKIP;
-            
+
             document.getElementById("input-nguoith").value = r.NguoiTH ? r.NguoiTH.tennv : "";
             document.getElementById("input-nguoitt").value = r.NguoiTT ? r.NguoiTT.tennv : "";
             document.getElementById("input-nguoigv").value = r.NguoiGV ? r.NguoiGV.tennv : "";
@@ -1354,7 +1458,7 @@
         // 5. THÊM CHỈ ĐỊNH (CREATE)
         async function onAddCaseClicked() {
             if (!supabaseClient) return;
-            
+
             const dateRaw = document.getElementById("input-date").value;
             const name = document.getElementById("input-name").value.trim();
             const chidinhStr = document.getElementById("input-chidinh").value.trim();
@@ -1362,7 +1466,7 @@
             const timeStart = document.getElementById("input-time-start").value;
             const timeEnd = document.getElementById("input-time-end").value;
             const isEkip = document.getElementById("input-ekip").checked;
-            
+
             const nguoithStr = document.getElementById("input-nguoith").value;
             const nguoittStr = document.getElementById("input-nguoitt").value;
             const nguoigvStr = document.getElementById("input-nguoigv").value;
@@ -1397,7 +1501,7 @@
                     if (r.Ngay === dateIso && rMayName === mayStr) {
                         const rStart = r.TG_bat_dau ? r.TG_bat_dau.slice(0, 5) : "";
                         const rEnd = r.TG_KT ? r.TG_KT.slice(0, 5) : "";
-                        
+
                         // Overlap detection
                         return (timeStart < rEnd) && (timeEnd > rStart);
                     }
@@ -1427,7 +1531,7 @@
                 return;
             }
 
-           // Tìm xem bệnh nhân này đã có ca nào trong lưới (cùng ngày) chưa
+            // Tìm xem bệnh nhân này đã có ca nào trong lưới (cùng ngày) chưa
             let existingPatient = mainRecords.find(r => r.Ten_BN.toLowerCase() === name.toLowerCase());
 
             const payload = {
@@ -1451,13 +1555,13 @@
             try {
                 const { error } = await upsertRecordSafely("Thongtin", payload, true);
                 if (error) throw error;
-                
+
                 showToast("Thêm mới ca chỉ định thành công!", "success");
-                
+
                 // Đồng bộ lưới hiển thị về ngày vừa nhập
                 document.getElementById("filter-start-date").value = dateRaw;
                 document.getElementById("filter-end-date").value = dateRaw;
-                
+
                 fetchMainRecords();
                 resetInputForm();
             } catch (err) {
@@ -1481,7 +1585,7 @@
             const timeStart = document.getElementById("input-time-start").value;
             const timeEnd = document.getElementById("input-time-end").value;
             const isEkip = document.getElementById("input-ekip").checked;
-            
+
             const nguoithStr = document.getElementById("input-nguoith").value;
             const nguoittStr = document.getElementById("input-nguoitt").value;
             const nguoigvStr = document.getElementById("input-nguoigv").value;
@@ -1508,7 +1612,7 @@
             if (mayStr !== "Không dùng máy") {
                 const isConflict = mainRecords.some(r => {
                     if (r.matt === selectedRecordId) return false; // Bỏ qua bản ghi hiện tại
-                    
+
                     const rMayName = r.May ? (r.May.tenmay || r.May.Tenmay) : "Không dùng máy";
                     if (r.Ngay === dateIso && rMayName === mayStr) {
                         const rStart = r.TG_bat_dau ? r.TG_bat_dau.slice(0, 5) : "";
@@ -1555,7 +1659,7 @@
             try {
                 const { error } = await upsertRecordSafely("Thongtin", payload, false, "matt", selectedRecordId);
                 if (error) throw error;
-                
+
                 showToast("Cập nhật thông tin ca thành công!", "success");
                 fetchMainRecords();
                 resetInputForm();
@@ -1582,7 +1686,7 @@
                     res = await supabaseClient.from("thongtin").delete().eq("matt", selectedRecordId);
                 }
                 if (res.error) throw res.error;
-                
+
                 showToast("Xóa ca điều trị thành công vĩnh viễn!", "success");
                 fetchMainRecords();
                 resetInputForm();
@@ -1599,7 +1703,7 @@
             document.getElementById("input-name").value = "";
             document.getElementById("input-ekip").checked = false;
             document.getElementById("input-nguoigv").value = "";
-            
+
             // Đặt lại dòng đầu tiên của dropdown nếu có
             const chidinhList = categoriesData["Chỉ định"] || [];
             document.getElementById("input-chidinh").value = chidinhList.length > 0 ? chidinhList[0] : "";
@@ -1636,10 +1740,10 @@
         // HÀM AUTO-FORMAT NGÀY KHI GÕ NHANH (FASTDATE-LINE-EDIT)
         function setupDateInputAutoformat(elemId) {
             const input = document.getElementById(elemId);
-            
-            input.addEventListener("blur", function() {
+
+            input.addEventListener("blur", function () {
                 let val = input.value.replace(/[/.-]/g, "");
-                
+
                 if (val.length === 8 && !isNaN(val)) {
                     // ddmmyyyy
                     const dd = val.substring(0, 2);
@@ -1653,7 +1757,7 @@
                     const yyyy = "20" + val.substring(4, 6);
                     input.value = `${dd}/${mm}/${yyyy}`;
                 }
-                
+
                 // Trực tiếp kích hoạt sự kiện textChanged nếu là input-date
                 if (elemId === "input-date") {
                     onInputDateChanged(input.value);
@@ -1673,14 +1777,14 @@
                 <button onclick="selectCategoryTab('Máy móc')" id="tab-may" class="w-full text-left text-sm px-4 py-2.5 rounded-xl font-semibold text-slate-600 hover:bg-slate-100 transition">Máy móc</button>
                 <button onclick="selectCategoryTab('Nhân viên')" id="tab-nhanvien" class="w-full text-left text-sm px-4 py-2.5 rounded-xl font-semibold text-slate-600 hover:bg-slate-100 transition">Nhân viên</button>
             `;
-            
+
             // CHỈ QUYỀN AD (ADMIN) mới có Tab "Quản lý User"
             if (currentUser && currentUser.quyen === 'AD') {
                 html += `
                     <button onclick="selectCategoryTab('Tài khoản')" id="tab-taikhoan" class="w-full text-left text-sm px-4 py-2.5 rounded-xl font-semibold text-slate-600 hover:bg-slate-100 transition">Quản lý User</button>
                 `;
             }
-            
+
             tabsContainer.innerHTML = html;
             document.getElementById("cat-modal").classList.remove("hidden");
             selectCategoryTab("Chỉ định");
@@ -1699,13 +1803,13 @@
             }
 
             activeTab = tabName;
-            
+
             const tabs = ["Chỉ định", "Máy móc", "Nhân viên", "Tài khoản"];
             tabs.forEach(t => {
                 const btnId = "tab-" + (t === "Chỉ định" ? "chidinh" : t === "Máy móc" ? "may" : t === "Nhân viên" ? "nhanvien" : "taikhoan");
                 const btn = document.getElementById(btnId);
                 if (!btn) return;
-                
+
                 if (t === tabName) {
                     btn.className = "w-full text-left text-sm px-4 py-2.5 rounded-xl font-semibold transition bg-blue-600 text-white shadow-md shadow-blue-100";
                 } else {
@@ -1714,12 +1818,12 @@
             });
 
             document.getElementById("cat-title-detail").innerText = `Danh mục: ${tabName === "Tài khoản" ? "Quản lý tài khoản User" : tabName}`;
-            
+
             // Ẩn/Hiện cột thời gian & liên kết động dựa trên nhóm tab
             const colDurs = document.querySelectorAll(".cat-col-duration");
             const colMachs = document.querySelectorAll(".cat-col-machines");
             const tableHeader = document.getElementById("cat-table").querySelector("thead tr");
-            
+
             if (tabName === "Chỉ định") {
                 colDurs.forEach(el => el.style.display = "");
                 colMachs.forEach(el => el.style.display = "");
@@ -1745,7 +1849,7 @@
             tbody.innerHTML = "";
 
             const items = categoriesData[activeTab] || [];
-            
+
             // Lọc "Không dùng máy" ra khỏi render bảng danh mục để sạch sẽ
             const renderItems = items.filter(it => it !== "Không dùng máy");
 
@@ -1758,7 +1862,7 @@
                 const tr = document.createElement("tr");
                 tr.className = "hover:bg-slate-50 transition cursor-pointer";
                 tr.dataset.name = name;
-                
+
                 tr.onclick = () => {
                     // Click chọn dòng
                     document.querySelectorAll("#cat-table-body tr").forEach(row => row.classList.remove("bg-blue-50"));
@@ -1774,7 +1878,7 @@
                     const dur = serviceDurationMap[name] || 15;
                     const linked = serviceMachineMap[name] || [];
                     const linkedText = linked.length > 0 ? linked.join(", ") : "Click để chọn máy...";
-                    
+
                     rowHtml += `
                         <td class="px-4 py-3 text-center border-r border-slate-100 font-bold text-slate-600">${dur}</td>
                         <td class="px-4 py-3 font-semibold text-blue-600 hover:text-blue-800 transition underline cursor-pointer" onclick="openLinkerModal('${name}')">${linkedText}</td>
@@ -1796,7 +1900,7 @@
         function openLinkerModal(chidinhName) {
             currentLinkChidinhName = chidinhName;
             document.getElementById("linker-title").innerText = `Gộp nhóm Máy móc cho: ${chidinhName}`;
-            
+
             const container = document.getElementById("linker-checklist-container");
             container.innerHTML = "";
 
@@ -1806,7 +1910,7 @@
             cleanMachines.forEach(machine => {
                 const div = document.createElement("div");
                 div.className = "flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 transition cursor-pointer";
-                
+
                 const isChecked = currentLinked.includes(machine) ? "checked" : "";
                 div.innerHTML = `
                     <input type="checkbox" id="link-m-${machine}" value="${machine}" ${isChecked} class="w-4.5 h-4.5 text-blue-600 border-slate-300 rounded focus:ring-blue-500 cursor-pointer">
@@ -1824,7 +1928,7 @@
 
         async function saveMachineLink() {
             if (!supabaseClient || !currentLinkChidinhName) return;
-            
+
             const checked = [];
             const checkboxes = document.querySelectorAll('#linker-checklist-container input[type="checkbox"]');
             checkboxes.forEach(chk => {
@@ -1847,12 +1951,12 @@
                         .update({ "may_lien_ket": linkedStr })
                         .eq("macd", uid);
                 }
-                
+
                 if (res.error) throw res.error;
 
                 // Cập nhật RAM
                 serviceMachineMap[currentLinkChidinhName] = checked;
-                
+
                 showToast("Lưu liên kết gộp nhóm máy móc thành công!", "success");
                 closeLinkerModal();
                 renderCategoryTable(); // Refresh table danh mục
@@ -1884,7 +1988,7 @@
                 const role = prompt("Nhập quyền tài khoản (AD hoặc US):", "US");
                 if (!role) return;
                 const cleanRole = role.toUpperCase().trim();
-                
+
                 if (cleanRole !== "AD" && cleanRole !== "US") {
                     showToast("Quyền tài khoản chỉ nhận giá trị AD (Admin) hoặc US (User)!", "error");
                     return;
@@ -1981,7 +2085,7 @@
                     const { error } = await upsertRecordSafely("Account", payload, false, "id", uid);
                     if (error) throw error;
                     showToast("Cập nhật tài khoản người dùng thành công!", "success");
-                    
+
                     // Nếu admin tự sửa chính mình, đồng bộ lại UI ngay
                     if (oldName === currentUser.username) {
                         currentUser.quyen = cleanRole;
@@ -1998,7 +2102,7 @@
 
             const newName = prompt("Nhập tên mới:", oldName);
             if (newName === null) return; // Người dùng ấn Hủy
-            
+
             const trimmedNewName = newName.trim();
             if (!trimmedNewName) {
                 showToast("Tên mục không được để trống!", "warning");
@@ -2012,10 +2116,10 @@
                 const oldDur = serviceDurationMap[oldName] || 15;
                 const newDurStr = prompt("Nhập số phút:", oldDur);
                 if (newDurStr === null) return; // Người dùng ấn Hủy
-                
+
                 const parsedDur = parseInt(newDurStr) || 15;
                 payload["Thoigian"] = parsedDur;
-                
+
                 // Kiểm tra xem có thực sự thay đổi tên hoặc thời gian không
                 if (trimmedNewName === oldName && parsedDur === oldDur) {
                     showToast("Không có thay đổi nào được thực hiện.", "warning");
@@ -2108,7 +2212,7 @@
         // ==========================================
         // XUẤT EXCEL CAO CẤP (SHEETJS EXPORTER)
         // ==========================================
-        
+
         // Trích xuất dữ liệu thô dạng phẳng từ bảng HTML/RAM
         function getRawExportData() {
             const data = [];
@@ -2152,7 +2256,7 @@
 
             // Cấu hình Merges cho SheetJS
             const merges = [];
-            
+
             // 1. Merge Ngày (Cột 0)
             let i = 0;
             while (i < data.length) {
@@ -2170,9 +2274,9 @@
             i = 0;
             while (i < data.length) {
                 let j = i + 1;
-                while (j < data.length && 
-                       data[j]["Ngày"] === data[i]["Ngày"] && 
-                       data[j]["Tên Bệnh Nhân"] === data[i]["Tên Bệnh Nhân"]) {
+                while (j < data.length &&
+                    data[j]["Ngày"] === data[i]["Ngày"] &&
+                    data[j]["Tên Bệnh Nhân"] === data[i]["Tên Bệnh Nhân"]) {
                     j++;
                 }
                 if (j - i > 1) {
@@ -2182,7 +2286,7 @@
             }
 
             ws['!merges'] = merges;
-            
+
             // Set độ rộng cột thích ứng
             ws['!cols'] = [
                 { wch: 15 }, // Ngày
@@ -2224,7 +2328,7 @@
             Object.entries(dateGroups).forEach(([dateStr, rows]) => {
                 const sheetName = dateStr.replace(/\//g, "-"); // Thay "/" bằng "-" để làm tên sheet hợp lệ
                 const ws = XLSX.utils.json_to_sheet(rows);
-                
+
                 ws['!cols'] = [
                     { wch: 15 }, { wch: 25 }, { wch: 20 }, { wch: 18 }, { wch: 10 },
                     { wch: 10 }, { wch: 20 }, { wch: 8 }, { wch: 20 }, { wch: 20 }
@@ -2243,10 +2347,10 @@
         function showToast(message, type = "success") {
             const container = document.getElementById("toast-container");
             const toast = document.createElement("div");
-            
+
             let icon = '<i class="fa-solid fa-circle-check"></i>';
             let colorClass = "bg-emerald-50 border-emerald-200 text-emerald-800";
-            
+
             if (type === "error") {
                 icon = '<i class="fa-solid fa-circle-exclamation"></i>';
                 colorClass = "bg-rose-50 border-rose-200 text-rose-800";
@@ -2257,7 +2361,7 @@
 
             toast.className = `flex items-center gap-2.5 px-4 py-3 rounded-xl border shadow-lg text-sm font-semibold transition-all duration-300 transform translate-y-2 opacity-0 ${colorClass}`;
             toast.innerHTML = `${icon} <span>${message}</span>`;
-            
+
             container.appendChild(toast);
 
             // Trigger Animation
@@ -2275,4 +2379,5 @@
         }
     </script>
 </body>
+
 </html>
